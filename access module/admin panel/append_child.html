@@ -1,0 +1,17 @@
+<script>
+var y="goyal";
+function appen(childre)
+{
+var x=document.createElement('button');
+var ya=document.createElement('br');
+x.style.margin=0;
+x.style.width='200px';
+x.innerHTML="mohit"+y;
+y+=y;
+childre.parentNode.appendChild(ya);
+childre.parentNode.appendChild(x);
+}
+</script>
+<div style='background:red'>
+<button onclick='appen(this)'>mohit</button>
+</div>

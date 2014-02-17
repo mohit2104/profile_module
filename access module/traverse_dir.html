@@ -1,0 +1,145 @@
+<html>
+<script src='mohit.js'></script>
+<script>
+
+function call_dir(dir_name,holder)
+{
+if(holder.value=='1')
+{
+if(holder.id=='start')
+{
+var image=holder.firstChild;
+if(image.src=='http://localhost/project/images/close_folder_hover.jpg')
+{
+image.src='../images/open_folder_hover.jpg';
+holder.parentNode.parentNode.childNodes[2].style.display='block';
+}
+else
+{
+image.src='../images/close_folder_hover.jpg';
+holder.parentNode.parentNode.childNodes[2].style.display='none';
+
+}}
+else
+{
+
+var image=holder.firstChild;
+if(image.src=='http://localhost/project/images/close_folder_hover.jpg')
+{
+image.src='../images/open_folder_hover.jpg';
+holder.parentNode.parentNode.childNodes[1].style.display='block';
+//alert(holder.parentNode.parentNode.childNodes[1].style.display);
+//alert("hello");
+}
+else
+{
+image.src='../images/close_folder_hover.jpg';
+holder.parentNode.parentNode.childNodes[1].style.display='none';
+}}}
+
+
+if(holder.value=='0')
+{
+holder.firstChild.src='../images/open_folder_hover.jpg';
+holder.value='1';
+}
+else return;
+if(dir_name=="");
+else
+dir_name+='/';
+$.ajax({
+  type: "GET",
+  url: "../file_dir.php",
+  data: {folder:dir_name}
+})
+  .done(function( msg ) {
+  
+  var y=appen(holder);
+    y.innerHTML=msg;
+  });
+  }
+ </script>
+<script>
+var shift=10;
+function appen(childre)
+{
+var ne=document.createElement('div');
+childre.parentNode.parentNode.appendChild(ne);
+ne.style.position="relative";
+ne.style.display='block';
+if(childre.id=='start')
+ne.style.left=parseFloat(childre.parentNode.parentNode.style.left)+10+'px';
+else
+ne.style.left=parseFloat(childre.parentNode.parentNode.parentNode.style.left)+10+'px';
+shift+=10;
+return ne;
+/*var x=document.createElement('button');
+var ya=document.createElement('br');
+x.style.margin=0;
+x.style.width='200px';
+x.innerHTML="mohit"+y;
+y+=y;
+childre.parentNode.appendChild(ya);
+childre.parentNode.appendChild(x); */
+}
+</script>
+<script>
+function change_onhover(image)
+{
+image=image.firstChild;
+if(image.src=='http://localhost/project/images/close_folder.jpg')
+image.src='../images/close_folder_hover.jpg';
+else
+image.src='../images/open_folder_hover.jpg';
+}
+function change_onout(image)
+{
+image=image.firstChild;
+if(image.src=='http://localhost/project/images/close_folder_hover.jpg')
+image.src='../images/close_folder.jpg';
+else
+image.src='../images/open_folder.jpg';
+}
+var store="";
+function select(fin)
+{
+if(store=="")
+{
+fin.parentNode.style.background='rgba(150,200,200,0.4)';
+fin.parentNode.style.borderRadius=5;
+fin.parentNode.style.border='1px solid rgba(150,200,200,0.8)';
+}
+else
+{
+store.style.background='';
+store.style.border='0';
+fin.parentNode.style.background='rgba(150,200,200,0.4)';
+fin.parentNode.style.borderRadius=5;
+fin.parentNode.style.border='1px solid rgba(150,200,200,0.6)';
+
+}
+store=fin.parentNode;
+}
+</script>
+<style>
+.folder_hover:hover
+{
+background:rgba(150,200,200,0.2);
+border-radius:5;
+border:1px solid rgba(150,200,200,0.4);
+}
+.butt
+{
+background:rgba(0,0,0,0);
+border:0;
+}
+.scrol_but
+{background:rgba(0,0,0,0);border:0;}
+</style>
+<div id='navigation_panel' style='position:absolute;left:0px;'>
+<div id='folder' class='folder_hover'><button value='0' id='start' class='scrol_but' onclick='call_dir("",this)' onmouseover='change_onhover(this)' onmouseout='change_onout(this)'}'><img src='../images/close_folder.jpg'></img></button><img src='../images/folder.jpg'></img>
+<button  value='0' class='butt' onclick='select(this)'>cms</button>
+</div></div>
+
+
+<div style='position:absolute;left:15%;width:90%;height:100%;top:0%;background:blue'></div>

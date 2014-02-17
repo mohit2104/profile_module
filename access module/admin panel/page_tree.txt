@@ -1,0 +1,7 @@
+empty cms
+cms profile
+cms fest
+cms/profile student
+cms/profile staff
+cms/fest pragyan
+cms/fest festember

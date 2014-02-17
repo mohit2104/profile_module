@@ -1,0 +1,25 @@
+<script src='mohit.js'></script>
+<script>
+
+function f()
+{
+var x=document.getElementById("new_admin").value;
+var y=document.getElementById("path").value;
+$.ajax({
+  type: "GET",
+  url: "add_admin.php",
+  data: {new_admin:x,path:y}
+})
+  .done(function( msg ) {
+    document.getElementById("output").innerHTML=msg;
+  });
+  }
+ </script>
+ add_admin<br>
+ Path <input type='text' id='path'></input><br>
+new admin username
+<input type='text' id="new_admin" >
+</input>
+<input type='button' onclick='f()' value='Submit'></input>
+<br>
+<div id='output'></div>

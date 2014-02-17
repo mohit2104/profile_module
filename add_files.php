@@ -1,0 +1,10 @@
+<?php
+$x=$_GET['path'];
+$y=$_GET['name'];
+$z=$x.'/'.$y;
+$t=$_GET['type'];
+if($t=='folder')
+mkdir($z);
+else
+touch($z);
+?>

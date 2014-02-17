@@ -1,0 +1,42 @@
+<script src="Chart.js"></script>
+
+<input type='number' id='value'>
+<!--button onclick='assign_area()'>assign</button><br-->
+<button onclick='f()'>insert</button><br>
+<button>+</button>
+<button onclick='g()'>design</button><br>
+
+<script>
+var i=-1;
+ var doughnutData ={};
+ function assign_area()
+ {
+ i++;
+ doughnutData[i]=new doughnut();
+ var can=document.createElement('canvas');
+ can.id='canvas'+i;
+ can.height=450;
+ can.width=450;
+ can.style.position='relative';
+ document.body.appendChild(can);
+ 
+ }
+ function doughnut()
+{
+this.dough=[];
+this.label=[];
+}
+function g()
+{
+var myDoughnut = new Chart(document.getElementById("canvas"+i).getContext("2d")).Doughnut(doughnutData[i].dough);
+}
+function f()
+{
+var ran1=Math.floor(Math.random()*255);
+var ran2=Math.floor(Math.random()*255);
+var ran3=Math.floor(Math.random()*255);
+var x=document.getElementById('value').value;
+doughnutData[i].dough.push({value : parseFloat(x), color:"rgb("+ran1+","+ran2+","+ran3+")"});
+}
+assign_area();
+</script>
